@@ -13,13 +13,19 @@
           <option value="3">Year 2 , Semester 2</option>
         </select>
       </div>
+
     </div>
   </section>
+  <div class="d-flex justify-content-center mt-2 gap-3 mb-4">
+    <SubjectAdd></SubjectAdd>
+    <button class="btn btn-warning" @click="isEdit=!isEdit">Edit</button>
+    <button class="btn btn-danger" @click="isDelete=!isDelete">Delete</button>
+  </div>
   <section class="container-fluid">
     <div class="container">
       <div class="row">
         <div class="col-md-4" v-for="(subjectItem, id ) in subject" :key="id" data-aos="fade-in">
-          <CardSubject :subject="subjectItem" :key="id"></CardSubject>
+          <CardSubject :subject="subjectItem" :key="id" :isEdit="isEdit" :isDelete="isDelete"></CardSubject>
         </div>
       </div>
     </div>
@@ -29,10 +35,13 @@
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 import CardSubject from '../components/CardSubject'
+import SubjectAdd from '../components/SubjectAdd'
+
 AOS.init();
 export default {
   components: {
-    CardSubject
+    CardSubject ,
+    SubjectAdd , 
   },
   data() {
     return {
@@ -45,7 +54,10 @@ export default {
         'Year 2 , Semester 1',
         'Year 2 , Semester 2'
       ],
-      semesters : "Year 1 , Semester 1" 
+      semesters : "Year 1 , Semester 1" ,
+      isEdit : false ,
+      isDelete : false ,
+      buttonState : 0 
     }
   },
   methods: {
